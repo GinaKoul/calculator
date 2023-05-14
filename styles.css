@@ -1,0 +1,126 @@
+/*.row{
+    display: flex;
+}
+
+.calculator{
+    display: flex;
+    flex-direction: column;
+}
+
+button{
+    width:80px;
+    height: 80px;
+    background: #FFFFFF;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+
+button:hover{
+    box-shadow: 0px 0px 16px 0 #4a7edd;
+}
+
+#8AAAE5*/
+
+body {
+    background: #8AAAE5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    min-height: 100vh;
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+
+h1 {
+    padding-top: 20px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 600px;
+    height: 400px;
+}
+
+.calculator > form {
+   display: flex;
+   flex-wrap: row wrap;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+}
+
+form > .part {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #8AAAE5;
+    width: 190px;
+    height: 100px;
+
+}
+
+input:hover, select:hover, button:hover, .input:hover, .output:hover {
+    box-shadow: 0px 0px 16px 0 #FFFFFF;
+}
+
+input[type=number], select, button, .input, .output {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #FFFFFF;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    background: #8AAAE5;
+    width: 150px;
+    text-align: center;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 25px;
+}
+
+button{
+    width: 100px;
+}
+
+.input {
+    width: 300px;
+    height: 60px;
+}
+
+.output {
+    width: 100px;
+    height: 60px;
+}
+
+.display{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+input[type=number]:focus, select:focus, button:focus {
+border: 3px solid #cccccc;
+}
+
+
+
+
