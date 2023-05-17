@@ -1,5 +1,5 @@
 /* Create the global variables that will hold 
-specific elements of the html file*/
+specific elements of the html file */
 
 const input = document.querySelector(".input");
 
@@ -18,7 +18,7 @@ let string = "";
 
 let array;
 
-let operator;
+//let operator;
 
 let add;
 
@@ -27,6 +27,12 @@ let sub;
 let multiply;
 
 let divide;
+
+let num = "";
+let numArray = [];
+let operArray = [];
+let operation = [];
+let i = 0;
 
 /* Add an event lintener that on each click
  will display the value each clicked button
@@ -49,113 +55,96 @@ function displayNum(button){
  needed function to do the math*/
 
 equals.addEventListener("click",()=>{
-    
 
-    if (string.indexOf("-")!== -1){
-        array = string.split("-");
-        //operator = "-";
-        console.log(array);
+    array = string.split("");
 
-        array= array.map(included =>{
-            if(included.indexOf("/")!== -1){
-                let inc = included;
-                inc = inc.split("/");
-                return division(inc);
-            }else if(included.indexOf("*")!== -1){
-                let inc = included;
-                inc = inc.split("*");
-                return multiplication(inc);
-            }else{
-                return included;
-            }
+    array.forEach(value=>{
+        if(value === "+" || value === "-" || value === "*" || value ==="/" ){
+            operArray.splice(i,0,value);
+            numArray.splice(i,0,num);
+            num = "";
+            i++;
 
-        });
-        
-        subtraction(array);
+        }else{
+            num += value;
+
+        }
+    });
+
+    i++;
+    numArray.splice(i,0,num);
+
+    for(let j=0; j<=operArray.length; j++){
+        if (operArray[j] === "/"){
+            arrayManipulation(j,division);
+
+        }else if (operArray[j] === "*"){
+            arrayManipulation(j,multiplication);
+        }
     }
 
-    if (string.indexOf("+")!== -1){
-        array = string.split("+");
-        operator = "+";
+    for(let j=0; j<=operArray.length; j++){
+  
+        if (operArray[j] === "+"){
+            arrayManipulation(j,addition);
+
+        }else if (operArray[j] === "-"){
+            arrayManipulation(j,subtraction);
+        }
     }
 
-    if (string.indexOf("*")!== -1){
-        array = string.split("*");
-        //operator = "*";
-    }
+    output.textContent = numArray;
 
-    if (string.indexOf("/")!== -1){
-        array = string.split("/");
-        //operator = "/";
-    }
-
-
-    if(operator === "+"){
-
-        addition(array);
-
-    }else if(operator === "-"){
-
-        subtraction(array);
-
-    }else if(operator === "*"){
-
-        multiplication(array);
-
-    }else if(operator === "/"){
-
-        division(array);
-
-    }
 });
+
+function arrayManipulation(j,oper){
+    operation = numArray.splice(j,2);
+    operArray.splice(j,1);
+ 
+    let newNum = oper(operation);
+    numArray.splice(j,0,newNum);
+    operation = [];
+}
 
 // Add each value of the array and returns the result
 
-function addition(array){
-    add = array.reduce((added,number)=>{
+function addition(operation){
+    add = operation.reduce((added,number)=>{
        return added += Number(number);
     },0);
 
     return add;
-
-    output.textContent = add;
 }
 
 // Subtract each value of the array and returns the result
 
-function subtraction(array){
+function subtraction(operation){
 
-    sub = array.reduce((subtract,number)=>{
+    sub = operation.reduce((subtract,number)=>{
         return subtract-= number;
     });
 
-    //return sub;
-
-    output.textContent = sub;
+    return sub;
 }
 
 // Murliply each value of the array and returns the result
 
-function multiplication(arr){
-    multiply = arr.reduce((multi,number)=>{
+function multiplication(operation){
+    multiply = operation.reduce((multi,number)=>{
         return multi *= number;
     });
 
     return multiply;
-
-    output.textContent = multiply;
 }
 
 // Divide each value of the array and returns the result
 
-function division(arr){
-    divide = arr.reduce((div,number)=>{
+function division(operation){
+    divide = operation.reduce((div,number)=>{
         return div /= number;
     });
 
     return divide;
-
-    output.textContent = divide;
 }
 
 /* Add event lintener to clear button that turns
@@ -171,4 +160,4 @@ clear.addEventListener("click",()=>{
     sub = "";
     multiply ="";
     divide ="";
-})
+});
