@@ -11,14 +11,22 @@ const buttons = document.querySelectorAll(".number");
 
 const clear = document.querySelector(".clear");
 
+const dot = document.querySelector(".dot");
+
+const operB = document.querySelectorAll("#oper");
+
+const numB = document.querySelectorAll(".num");
+
+const back = document.querySelector(".back");
+
+const message = document.querySelector(".message");
+
 /* Create global variables that will hold 
 the result of the functions*/
 
 let string = "";
 
 let array;
-
-//let operator;
 
 let add;
 
@@ -34,6 +42,18 @@ let operArray = [];
 let operation = [];
 let i = 0;
 
+let last;
+
+let float= true;
+
+let dotAble = true;
+
+let error= false;
+
+let errorM = "";
+
+let op = true;
+
 /* Add an event lintener that on each click
  will display the value each clicked button
  one next to an other and will pass all the values
@@ -46,55 +66,114 @@ buttons.forEach(button =>{
 });
 
 function displayNum(button){
-    string += button.value;
-    input.textContent += button.value;
+    if((button.value!=="." || float) && ((button.value!=="+" && button.value!=="-" && button.value!=="*" && button.value!=="/")|| op)){
+        string += button.value;
+        input.textContent += button.value;
+    }
 }
 
+//Allow or not to enter a dot or an operator
+
+dot.addEventListener("click", ()=>{
+    float= false;
+    op = false;
+});
+
+operB.forEach(oper =>{
+    oper.addEventListener("click", ()=>{
+        dotAble===true;
+        float = false;
+        op = false;
+    });
+});
+
+numB.forEach(num =>{
+    num.addEventListener("click", ()=>{
+        if(dotAble=true){
+            float= true;
+        }
+        op = true;
+    });
+});
+
+//Remove last value of string
+
+back.addEventListener("click", ()=>{
+    array = string.split("");
+    last = array.splice(-1,1);
+    
+    last[0] === '.'?float= true:float= false;
+    if(last[0]=== '+'|| last[0]=== '-'||last[0]=== '*'||last[0]=== '/'){
+        op = true;
+    }else{
+        op = false;
+    }
+
+    string = array.join("");
+    array= [];
+    input.textContent = string;
+});
+
 /* Add an event listener on the equals button
- that converts strings to arrays and calls the 
- needed function to do the math*/
+ that converts string to two arrays, one with 
+ the numbers and one with the operators, and 
+ calls the needed function to make the calculations*/
 
 equals.addEventListener("click",()=>{
 
     array = string.split("");
 
-    array.forEach(value=>{
-        if(value === "+" || value === "-" || value === "*" || value ==="/" ){
-            operArray.splice(i,0,value);
-            numArray.splice(i,0,num);
-            num = "";
-            i++;
+    if(array[0] === "+" || array[0] === "-" || array[0] === "*" || array[0] ==="/" || array[array.length-1] === "+" || array[array.length-1] === "-" || array[array.length-1] === "*" || array[array.length-1] ==="/"){
+        message.textContent = "Calculation can not start or end with an operator";
+    }else{
 
+        array.forEach(value=>{
+            if(value === "+" || value === "-" || value === "*" || value ==="/" ){
+                operArray.splice(i,0,value);
+                numArray.splice(i,0,num);
+                num = "";
+                i++;
+
+            }else{
+                num += value;
+
+            }
+        });
+
+        i++;
+        numArray.splice(i,0,num);
+
+        for(let j=0; j<=operArray.length; j++){
+            if (operArray[j] === "/"){
+                arrayManipulation(j,division);
+                j--;
+
+            }else if (operArray[j] === "*"){
+                arrayManipulation(j,multiplication);
+                j--;
+            }
+        }
+
+        for(let j=0; j<=operArray.length; j++){
+    
+            if (operArray[j] === "+"){
+                arrayManipulation(j,addition);
+                j--;
+
+            }else if (operArray[j] === "-"){
+                arrayManipulation(j,subtraction);
+                j--;
+            }
+        }
+
+        message.textContent = errorM;
+        if(errorM === "Can not divide by 0"){
+            output.textContent = "ERROR";
         }else{
-            num += value;
-
+            output.textContent = Math.round(numArray * 10) / 10;
         }
-    });
-
-    i++;
-    numArray.splice(i,0,num);
-
-    for(let j=0; j<=operArray.length; j++){
-        if (operArray[j] === "/"){
-            arrayManipulation(j,division);
-
-        }else if (operArray[j] === "*"){
-            arrayManipulation(j,multiplication);
-        }
+        clearF();
     }
-
-    for(let j=0; j<=operArray.length; j++){
-  
-        if (operArray[j] === "+"){
-            arrayManipulation(j,addition);
-
-        }else if (operArray[j] === "-"){
-            arrayManipulation(j,subtraction);
-        }
-    }
-
-    output.textContent = numArray;
-
 });
 
 function arrayManipulation(j,oper){
@@ -140,11 +219,22 @@ function multiplication(operation){
 // Divide each value of the array and returns the result
 
 function division(operation){
-    divide = operation.reduce((div,number)=>{
-        return div /= number;
-    });
 
-    return divide;
+    for(let k=1; k<operation.length; k++){
+        if(operation[k]==="0"){
+            errorM = "Can not divide by 0";
+            error = true;
+        }
+    }
+    if(!error){
+        divide = operation.reduce((div,number)=>{
+            return div /= number;
+        });
+
+        return divide;
+    }
+
+    error= false;
 }
 
 /* Add event lintener to clear button that turns
@@ -154,10 +244,21 @@ clear.addEventListener("click",()=>{
     input.textContent = "";
     output.textContent = "";
     string = "";
+    clearF();
+    i = 0;
+    float= true;
+});
+
+function clearF(){
     array = "";
-    operator = "";
     add ="";
     sub = "";
     multiply ="";
     divide ="";
-});
+    num = "";
+    numArray = [];
+    operArray = [];
+    operation = [];
+    i = 0;
+    errorM = "";
+}

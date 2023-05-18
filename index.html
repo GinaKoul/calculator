@@ -13,30 +13,6 @@
 
     <main class="calculator">
 
-        <!--<form id="calculate">
-
-            <div class="part">
-                <label for="num1">Number</label>
-                <input type="number" name="num1" id="num1">
-            </div>
-
-            <div class="part">
-                <label for="operator">Operator</label>
-                <select name="operator" id="operator" form="operform">
-                    <option value="addition">+</option>
-                    <option value="subtraction">-</option>
-                    <option value="multiplication">*</option>
-                    <option value="division">/</option>
-                </select>
-            </div>
-
-            <div class="part">
-                <label for="num2">Number</label>
-                <input type="number" name="num2" id="num2">
-            </div>
-
-        </form>-->
-
         <div class="display">
 
         <p class="input"></p>
@@ -44,75 +20,43 @@
 
         </div>
 
-        <div class="row">
-            <button class="number" value="7">7</button>
-            <button class="number" value="8">8</button>
-            <button class="number" value="9">9</button>
-            <button class="number" value="*">*</button>
+        <div>
+            <button class="number num" value="7">7</button>
+            <button class="number num" value="8">8</button>
+            <button class="number num" value="9">9</button>
+            <button class="number" id="oper" value="*">*</button>
         </div>
-        <div class="row">
-            <button class="number" value="4">4</button>
-            <button class="number" value="5">5</button>
-            <button class="number" value="6">6</button>
-            <button class="number" value="-">-</button>
+        <div>
+            <button class="number num" value="4">4</button>
+            <button class="number num" value="5">5</button>
+            <button class="number num" value="6">6</button>
+            <button class="number" id="oper" value="-">-</button>
         </div>
-        <div class="row">
-            <button class="number" value="1">1</button>
-            <button class="number" value="2">2</button>
-            <button class="number" value="3">3</button>
-            <button class="number" value="+">+</button>
+        <div>
+            <button class="number num" value="1">1</button>
+            <button class="number num" value="2">2</button>
+            <button class="number num" value="3">3</button>
+            <button class="number" id="oper" value="+">+</button>
         </div>
 
-        <div class="row">
+        <div>
             <button class="clear">C</button>
-            <button class="number" value="0">0</button>
-            <button class="equals">=</button>
-            <button class="number" value="/">/</button>
+            <button class="number num" value="0">0</button>
+            <button class="number dot" value=".">.</button>
+            <button class="number" id="oper" value="/">/</button>
         </div>
 
-        <!--<button class="equals">=</button>-->
+        <div class="row">
+            <div class="column">
+                <button class="back">&#129128</button>
+                <button class="equals">=</button>
+            </div>
+            <p class="message"></p>
+        </div>
 
     </main>
 
     <footer>Copyright &copy GinaKoul &hearts; </footer>
-
     
 </body>
 </html>
-
-<!--<div class="display">
-    <p></p>
-</div>
-
-<div class="calculator">
-    <div class="row">
-        <button class="clear">C</button>
-        <button class="blackets">()</button>
-        <button class="percent">%</button>
-        <button class="divide">/</button>
-    </div>
-    <div class="row">
-        <button class="n7">7</button>
-        <button class="n8">8</button>
-        <button class="n9">9</button>
-        <button class="multiply">*</button>
-    </div>
-    <div class="row">
-        <button class="n4">4</button>
-        <button class="n5">5</button>
-        <button class="n6">6</button>
-        <button class="subtract">-</button>
-    </div>
-    <div class="row">
-        <button class="n1">1</button>
-        <button class="n2">2</button>
-        <button class="n3">3</button>
-        <button class="add">+</button>
-    </div>
-    <div class="row">
-        <button class="pos-neg">+/-</button>
-        <button class="n0">0</button>
-        <button class="dot">.</button>
-        <button class="equals">=</button>
-    </div>
-</div>-->
