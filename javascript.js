@@ -46,7 +46,7 @@ let last;
 
 let float= true;
 
-let dotAble = true;
+let dotAble = false;
 
 let error= false;
 
@@ -77,11 +77,12 @@ function displayNum(button){
 dot.addEventListener("click", ()=>{
     float= false;
     op = false;
+    dotAble = false;
 });
 
 operB.forEach(oper =>{
     oper.addEventListener("click", ()=>{
-        dotAble===true;
+        dotAble = true;
         float = false;
         op = false;
     });
@@ -89,7 +90,7 @@ operB.forEach(oper =>{
 
 numB.forEach(num =>{
     num.addEventListener("click", ()=>{
-        if(dotAble=true){
+        if(dotAble){
             float= true;
         }
         op = true;
@@ -98,20 +99,64 @@ numB.forEach(num =>{
 
 //Remove last value of string
 
-back.addEventListener("click", ()=>{
+back.addEventListener("click", backspace);
+
+function backspace(){
+
     array = string.split("");
     last = array.splice(-1,1);
+
+    let regex2 = /\d/;
     
-    last[0] === '.'?float= true:float= false;
+    if(last[0] === '.'){
+        float= true;
+        op = true;
+        dotAble = true;
+    }
+
     if(last[0]=== '+'|| last[0]=== '-'||last[0]=== '*'||last[0]=== '/'){
         op = true;
-    }else{
+        if(dotAble && !float){
+            float = true;
+            dotAble = false;
+        }
+    }
+
+    if(regex2.test(last)){
+        float = false;
         op = false;
     }
 
     string = array.join("");
     array= [];
     input.textContent = string;
+}
+
+window.addEventListener("keydown",(event)=>{
+    let key = event.key;
+    let regex = /\d|\+|\-|\*|\//;
+    if(regex.test(key)){
+        string += `${key}`;
+        input.textContent = string;
+        output.textContent = "";
+    }else if(key==="Enter"){
+        event.preventDefault();
+        calculations();
+    }else if(key==="Backspace"){
+        backspace();
+    }
+});
+
+/* On click of the output the result will be 
+added to the input field and removed from the
+output field*/ 
+
+output.addEventListener("click",()=>{
+    if(output.textContent!==""){
+        string = output.textContent;
+        input.textContent = string;
+        output.textContent = "";
+    }
 });
 
 /* Add an event listener on the equals button
@@ -119,7 +164,9 @@ back.addEventListener("click", ()=>{
  the numbers and one with the operators, and 
  calls the needed function to make the calculations*/
 
-equals.addEventListener("click",()=>{
+equals.addEventListener("click",calculations);
+
+function calculations(){
 
     array = string.split("");
 
@@ -171,10 +218,11 @@ equals.addEventListener("click",()=>{
             output.textContent = "ERROR";
         }else{
             output.textContent = Math.round(numArray * 10) / 10;
+            console.log(output.textContent);
         }
         clearF();
     }
-});
+}
 
 function arrayManipulation(j,oper){
     operation = numArray.splice(j,2);
@@ -245,12 +293,14 @@ clear.addEventListener("click",()=>{
     output.textContent = "";
     string = "";
     clearF();
-    i = 0;
     float= true;
+    op = true;
+    dotAble = false;
+    error= false;
 });
 
 function clearF(){
-    array = "";
+    array = [];
     add ="";
     sub = "";
     multiply ="";
