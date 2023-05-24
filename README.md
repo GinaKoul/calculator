@@ -4,5 +4,5 @@ This project is a calculator that does first the divisions and multiplications a
 
 The numbers and operators are added to the calculation with the use of the buttons that are displayed on the screen. It also has keyboard support.
 
-This project can be find using the link below:
+This project can be found using the link below:
 https://ginakoul.github.io/calculator/
