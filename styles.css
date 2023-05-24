@@ -58,7 +58,7 @@ button:hover, .input:hover, .output:hover, .message:hover {
 
 button, .input, .output, .message {
     padding: 12px 20px;
-    margin: 6px 0;
+    margin: 4px 0;
     box-sizing: border-box;
     border: 3px solid #FFFFFF;
     -webkit-transition: 0.5s;
@@ -139,12 +139,6 @@ button:focus, .message:focus {
     -webkit-transform: rotate(-135deg);
 }
 
-#footer > div >p >button{
-    background-color: #1F2937;
-    width: 20px;
-    height: 20px;
-}
-
 .credit{
     display: none;
 }
@@ -179,10 +173,10 @@ a:hover{
     gap: 20px;
     justify-content: start;
     align-items: center;
-    width: 100%;
+    width: 80%;
     font-size: 25px;
 }
 
 #footer > .copy{
-    margin-left: 32%;
+    margin-left: 28%;
 }

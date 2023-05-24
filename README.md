@@ -6,5 +6,3 @@ The numbers and operators are added to the calculation with the use of the butto
 
 This project can be find using the link below:
 https://ginakoul.github.io/calculator/
-
-To make it responsive, the @media queries are used.
