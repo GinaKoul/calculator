@@ -1,4 +1,4 @@
-# calculator
+# Calculator
 
 This project is a calculator that does first the divisions and multiplications and then the additions and subtractions. To make an addition or subtraction first, make the calculation, click on the output and then proceed with the division or multiplication.
 
