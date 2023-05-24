@@ -42,11 +42,6 @@ h1 {
     gap: 20px;
 }
 
-/*.row > .message{
-    width: 310px;
-    height: 135px;
-}*/
-
 .row > .message{
     width: 260px;
     height: 115px;
@@ -72,38 +67,20 @@ button, .input, .output, .message {
     font-size: 25px;
 }
 
-/*button{
-    width: 100px;
-}*/
-
 button{
     width: 85px;
 }
 
-/*.back{
-    width: 100px;
-    height: 63px;
-}*/
 
 .back, .equals{
     width: 85px;
     height: 50px;
 }
 
-/*.input {
-    width: 250px;
-    height: 60px;
-}*/
-
 .input {
     width: 225px;
     height: 60px;
 }
-
-/*.output {
-    width: 150px;
-    height: 60px;
-}*/
 
 .output {
     width: 125px;
